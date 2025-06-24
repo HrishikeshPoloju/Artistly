@@ -1,6 +1,6 @@
 
 "use client";
-
+import Image from "next/image";
 export default function ArtistCategoryCard({ title, image }) {
   return (
     <div className="rounded-xl overflow-hidden shadow hover:shadow-lg transition">

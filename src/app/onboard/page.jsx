@@ -9,6 +9,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import Loader from "@/components/Loader";
+
 
 const categories = ["Singers", "Dancers", "Speakers", "DJs"];
 const languages = ["Hindi", "English", "Tamil", "Marathi"];
@@ -33,6 +37,11 @@ const schema = yup.object().shape({
     .min(1, "Select at least one language")
     .required(),
   fee: yup.string().required("Fee range is required"),
+});
+
+const OnboardForm = dynamic(() => import("@/components/OnboardForm"), {
+  ssr: false,
+  loading: () => <Loader />,
 });
 
 export default function OnboardPage() {
@@ -64,6 +73,9 @@ const { addArtist } = useArtistContext();
 };
 
   return (
+    <Suspense fallback={<Loader />}>
+      <OnboardForm />
+    
     <div className="max-w-2xl mx-auto px-4 py-8">
       <h2 className="text-3xl font-bold mb-6 text-center">Artist Onboarding</h2>
 
@@ -129,5 +141,6 @@ const { addArtist } = useArtistContext();
         <Button type="submit">Submit</Button>
       </form>
     </div>
+    </Suspense>
   );
 }
