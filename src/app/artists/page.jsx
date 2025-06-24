@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import artistsData from "@/lib/data/artists.json";
-import ArtistCard from "@/components/ArtistCard";
 import FilterBlock from "@/components/FilterBlock";
+import ArtistCard from "@/components/ArtistCard";
 import useFilter from "@/hooks/useFilter";
+import artistsData from "@/lib/data/artists.json";
+import { useArtistContext } from "@/context/ArtistContext";
 
 export default function ArtistListingPage() {
   const [filters, setFilters] = useState({
@@ -13,7 +14,10 @@ export default function ArtistListingPage() {
     price: "",
   });
 
-  const filteredArtists = useFilter(artistsData, filters);
+  const { submittedArtists } = useArtistContext();
+
+  const allArtists = [...artistsData, ...submittedArtists];
+  const filteredArtists = useFilter(allArtists, filters);
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-6">
@@ -27,7 +31,9 @@ export default function ArtistListingPage() {
             <ArtistCard key={artist.id} artist={artist} />
           ))
         ) : (
-          <p className="col-span-full text-center text-muted-foreground">No artists found.</p>
+          <p className="col-span-full text-center text-muted-foreground">
+            No artists found.
+          </p>
         )}
       </div>
     </section>

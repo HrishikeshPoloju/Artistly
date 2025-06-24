@@ -1,20 +1,14 @@
 "use client";
-
-import { useForm, Controller } from "react-hook-form";
+import { useArtistContext } from "@/context/ArtistContext";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import {
-  Input,
-  Textarea,
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-  Button,
-  Label,
-} from "@/components/ui"; // Adjust this if you’re importing individually
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 const categories = ["Singers", "Dancers", "Speakers", "DJs"];
 const languages = ["Hindi", "English", "Tamil", "Marathi"];
@@ -24,6 +18,7 @@ const feeRanges = [
   "₹25,000 - ₹50,000",
   "₹30,000 - ₹60,000",
 ];
+
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -41,10 +36,11 @@ const schema = yup.object().shape({
 });
 
 export default function OnboardPage() {
+const { addArtist } = useArtistContext();
+
   const {
     register,
     handleSubmit,
-    control,
     reset,
     formState: { errors },
   } = useForm({
@@ -56,16 +52,16 @@ export default function OnboardPage() {
   });
 
   const onSubmit = (data) => {
-    const submitted = {
-      ...data,
-      id: Date.now(),
-    };
-
-    console.log("Submitted Artist:", submitted);
-
-    alert("Form submitted successfully!");
-    reset();
+  const submitted = {
+    ...data,
+    id: Date.now(),
   };
+
+  addArtist(submitted); 
+  console.log("Submitted Artist:", submitted);
+  alert("Form submitted successfully!");
+  reset(); 
+};
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
@@ -94,12 +90,7 @@ export default function OnboardPage() {
           <Label>Category</Label>
           {categories.map((cat) => (
             <label key={cat} className="block">
-              <input
-                type="checkbox"
-                value={cat}
-                {...register("category")}
-                className="mr-2"
-              />
+              <input type="checkbox" value={cat} {...register("category")} className="mr-2" />
               {cat}
             </label>
           ))}
@@ -110,12 +101,7 @@ export default function OnboardPage() {
           <Label>Languages Spoken</Label>
           {languages.map((lang) => (
             <label key={lang} className="block">
-              <input
-                type="checkbox"
-                value={lang}
-                {...register("languages")}
-                className="mr-2"
-              />
+              <input type="checkbox" value={lang} {...register("languages")} className="mr-2" />
               {lang}
             </label>
           ))}
