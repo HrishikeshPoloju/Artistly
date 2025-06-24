@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# 🎭 Artistly — Performers Booking Platform
 
-First, run the development server:
+**Artistly** is a fictional event management platform where **event planners** can browse artists, and **managers** can onboard talent. This project was built as part of a frontend assignment using **Next.js App Router**, **Tailwind CSS**, **Shadcn UI**, and **React Hook Form**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##  Features Implemented
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+###  1. Homepage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ File: `src/app/page.jsx`
+ Components Used:
 
-## Learn More
+* `Header.jsx` (for navigation beteen pages)
+* `Hero section`
+* `ArtistCategoryCard.jsx` (Singers, Dancers, DJs, Speakers)
+* `Footer.jsx`
 
-To learn more about Next.js, take a look at the following resources:
+ Features Implemented:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* Overview of the platform
+* CTA button to **Explore Artists**
+* Responsive category cards
+* Navigation to `/artists`, `/onboard`, and `/dashboard`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+###  2. Artist Listing Page
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ File: `src/app/artists/page.jsx`
+ Dummy Data: `src/lib/data/artists.json` for listing artists on Explore artist page
+ Components Used:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* `ArtistCard.jsx`
+* `FilterBlock.jsx`
+
+ Features:
+
+* Grid layout of artist cards
+* Each card shows: **Name, Category, Fee, Location, Ask for Quote CTA**
+* Fully working **filtering by Category, Location, Price**
+* Responsive layout (list/grid toggle on screen size)
+
+💡 **Logic**: Filtering is implemented via a custom hook:
+ custom hook folder for filter logic: `src/hooks/useFilter.jsx`
+
+---
+
+###  3. Artist Onboarding Form
+
+ File: `src/app/onboard/page.jsx`
+ Form Logic: `src/components/OnboardForm.jsx`
+ Tools Used:
+
+* **React Hook Form + Yup** for validation
+* **Shadcn UI** inputs
+* **useContext** for state (see `ArtistContext.jsx`)
+
+ Features:
+
+* Inputs: Name, Bio, Location
+* Multi-select checkboxes for **Category** and **Languages**
+* Fee dropdown
+* Optional Image upload
+* Form submission updates shared context
+* Real-time validation and error messages
+
+ **Bonus**: This form is **lazy-loaded** using `next/dynamic` for better performance and we can see the boost in performance before and after lazy-loading.
+
+---
+
+###  4. Manager Dashboard Page
+
+ File: `src/app/dashboard/page.jsx`
+ Table Component: `src/components/Table.jsx`
+ State From: `ArtistContext.jsx`
+
+ Features:
+
+* Table displays submitted artists from onboarding form
+* Shows: Name, Category, Location, Fee, and **Remove** action
+* Removing artist also removes them from **Explore**
+* Conditional rendering (empty state message)
+
+---
+
+##  Other Technical Highlights
+
+| Feature                 | Implementation                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------ |
+| **Routing**             | Next.js App Router (`/app` directory)                                          |
+| **State Management**    | `React Context API` — `ArtistContext.jsx`                                      |
+| **Component Styling**   | `Tailwind CSS` + `Shadcn UI` (`src/components/ui/`)                            |
+| **Form Validation**     | `React Hook Form` + `Yup`                                                      |
+| **Lazy Loading**        | Used `next/dynamic` + `Suspense` to load onboarding form                       |
+| **Responsive Design**   | Fully mobile-responsive using grid, flex, Tailwind utilities                   |
+| **Code Structure**      | Modular folder structure: `components/`, `hooks/`, `lib/`, `context/`, `app/`  |
+| **Deployment**          | Built for **Vercel** deployment with `/public` assets, metadata, and SEO-ready |
+| **Reusable Components** | ArtistCard, Table, FilterBlock, Header, Footer, CategoryCard                   |
+
+---
+
+## 🌈 Bonus Features
+
+*  React Context used for shared artist state
+*  Lazy loading for `/onboard`
+
+
+---
+
+##  Submission Highlights
+
+| Criteria           | Covered?              |
+| ------------------ | --------------------- |
+| Component reuse    | ✅ Yes                 |
+| Filtering logic    | ✅ Yes                 |
+| Form validation UX | ✅ Yes                 |
+| useState/useEffect | ✅ Yes                 |
+| useContext         | ✅ Yes                 |
+| Data Simulation    | ✅ Local context state |
+| Lazy Loading       | ✅ OnboardForm.jsx     |
+| Deployment-ready   | ✅ Prepared for Vercel |
+
+---
+
