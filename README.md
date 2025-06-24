@@ -4,6 +4,25 @@
 **Artistly** is a fictional event management platform where **event planners** can browse artists, and **managers** can onboard talent. This project was built as part of a frontend assignment using **Next.js App Router**, **Tailwind CSS**, **Shadcn UI**, and **React Hook Form**.
 
 ---
+** Performance Optimization: Lazy Loading with next/dynamic and Suspense **
+
+* ![image](https://github.com/user-attachments/assets/9a4bb660-1e60-4927-bab3-55510f064995)
+
+Before Optimization (No Lazy Loading):
+Lighthouse Performance Score: 65
+Issues Identified:
+All components loaded eagerly on route load.
+Increased JavaScript bundle size.
+Higher initial page load time.
+
+* ![image](https://github.com/user-attachments/assets/1bf74c93-7934-41a6-8875-ac7d0b64a28f)
+After Optimization (With Lazy Loading + Suspense):
+Lighthouse Performance Score: 74
+What Was Optimized:
+Dynamically imported heavy components like <Table /> using next/dynamic.
+Suspense fallback (<Loader />) used for a smoother user experience.
+Only necessary components are fetched when needed.
+
 
 ##  Features Implemented
 
