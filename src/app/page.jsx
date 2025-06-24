@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ArtistCategoryCard from "@/components/ArtistCategoryCard";
 import Link from "next/link";
@@ -15,8 +14,6 @@ const categories = [
 export default function HomePage() {
   return (
     <>
-      <Header />
-
       <section className="bg-gray-100 py-16 px-6 text-center">
         <h1 className="text-4xl font-bold mb-4">Book Talented Artists for Your Event</h1>
         <p className="text-gray-600 mb-6 max-w-xl mx-auto">

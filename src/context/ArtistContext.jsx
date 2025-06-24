@@ -1,5 +1,4 @@
 "use client";
-
 import { createContext, useContext, useState } from "react";
 
 const ArtistContext = createContext();
@@ -11,8 +10,12 @@ export const ArtistProvider = ({ children }) => {
     setSubmittedArtists((prev) => [...prev, artist]);
   };
 
+  const removeArtist = (id) => {
+    setSubmittedArtists((prev) => prev.filter((artist) => artist.id !== id));
+  };
+
   return (
-    <ArtistContext.Provider value={{ submittedArtists, addArtist }}>
+    <ArtistContext.Provider value={{ submittedArtists, addArtist, removeArtist }}>
       {children}
     </ArtistContext.Provider>
   );
