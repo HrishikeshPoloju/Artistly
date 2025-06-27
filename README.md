@@ -1,5 +1,6 @@
 
 # 🎭 Artistly — Performers Booking Platform
+## Live : https://artistly-eta.vercel.app/
 
 **Artistly** is a fictional event management platform where **event planners** can browse artists, and **managers** can onboard talent. This project was built as part of a frontend assignment using **Next.js App Router**, **Tailwind CSS**, **Shadcn UI**, and **React Hook Form**.
 
